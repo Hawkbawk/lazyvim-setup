@@ -22,6 +22,13 @@ return {
   },
   -- Fugitive for a better git experience
   {
-    "tpope/vim-fugitive"
+    "tpope/vim-fugitive",
+    cmd = {
+      "G",
+      "Gdiffsplit",
+      "Gvdiffsplit",
+      "Gedit",
+      "Gsplit",
+    }
   },
 }

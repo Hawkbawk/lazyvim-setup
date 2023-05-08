@@ -12,7 +12,23 @@ wk.register({
     f = { "<cmd>Telescope fd<cr>", "Find Files" },
     h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
   },
+  g = {
+    name = "Git",
+    d = { "<cmd>Gvdiffsplit<cr>", "Diff" },
+  },
 }, {
   prefix = "<leader>",
+  mode = "n",
   nnoremap = true,
+  silent = true,
+})
+
+wk.register({
+  g = {
+    d = { "<cmd>diffget //2<cr>", "Diff Get" },
+    p = { "<cmd>diffput //2<cr>", "Diff Put" },
+  },
+}, {
+  mode = "n",
+  silent = true,
 })

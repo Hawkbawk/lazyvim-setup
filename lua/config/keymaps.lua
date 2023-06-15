@@ -3,32 +3,28 @@
 -- Add any additional keymaps here
 
 local wk = require("which-key")
+local telescope = require("telescope.builtin")
 
 vim.api.nvim_set_keymap("t", "<esc>", "<C-\\><C-n><cmd>q<cr>", { noremap = true })
 
 wk.register({
   f = {
     name = "Find",
-    f = { "<cmd>Telescope fd<cr>", "Find Files" },
+    f = {
+      function()
+        telescope.find_files({
+          find_command = { "rg", "--files", "--hidden", "--follow", "--no-ignore-vcs", "-g", "!.git" },
+          hidden = true,
+          no_ignore = true,
+        })
+      end,
+      "Find Files",
+    },
     h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
-  },
-  g = {
-    name = "Git",
-    d = { "<cmd>Gvdiffsplit<cr>", "Diff" },
   },
 }, {
   prefix = "<leader>",
   mode = "n",
   nnoremap = true,
-  silent = true,
-})
-
-wk.register({
-  g = {
-    d = { "<cmd>diffget //2<cr>", "Diff Get" },
-    p = { "<cmd>diffput //2<cr>", "Diff Put" },
-  },
-}, {
-  mode = "n",
   silent = true,
 })

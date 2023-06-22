@@ -61,3 +61,5 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>e", "<cmd>Lexplore<cr>", { noremap = true, silent = true })
   end,
 })
+
+vim.api.nvim_create_user_command("Ger", "G push origin HEAD:refs/for/master", {})

@@ -51,6 +51,23 @@ return {
         "<cmd>lua require('fzf-lua').quickfix()<cr>",
         desc = "Quickfix",
       },
+      {
+        "<leader>fs",
+        "<cmd>lua require('fzf-lua').lsp_document_symbols()<cr>",
+        desc = "Document Symbols",
+      },
+      {
+        "<leader>fS",
+        "<cmd>lua require('fzf-lua').lsp_workspace_symbols()<cr>",
+        desc = "Workspace Symbols",
+      },
+      {
+        "<leader>ca",
+        "<cmd>lua require('fzf-lua').lsp_code_actions()<cr>",
+        desc = "Code Actions",
+      },
+      -- Additional keymaps are defined in `lua/plugins/lspconfig.lua`, as they're setup
+      -- when the LSP attaches
     },
   },
 }

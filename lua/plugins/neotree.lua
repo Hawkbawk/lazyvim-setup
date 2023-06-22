@@ -1,6 +1,6 @@
 return {
   {
-    "nvim-telescope/telescope.nvim",
+    "nvim-neo-tree/neo-tree.nvim",
     enabled = false,
   },
 }

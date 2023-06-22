@@ -10,16 +10,18 @@ vim.api.nvim_clear_autocmds({ group = lsp_group, buffer = bufnr })
 vim.api.nvim_clear_autocmds({ group = easy_quit_group, buffer = bufnr })
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
-    "TelescopePrompt",
     "man",
     "help",
     "log",
     "git",
+    "fzf",
+    "fugitiveblame",
   },
   buffer = bufnr,
   callback = function()
     vim.api.nvim_buf_set_keymap(0, "i", "<ESC>", "<ESC><cmd>q!<cr>", { noremap = true })
     vim.api.nvim_buf_set_keymap(0, "n", "<ESC>", "<ESC><cmd>q!<cr>", { noremap = true })
+    vim.api.nvim_buf_set_keymap(0, "n", "q", "<ESC><cmd>q!<cr>", { noremap = true })
   end,
 })
 
@@ -51,4 +53,11 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
   pattern = "*",
   command = "lua OpenDiagnosticIfNoFloat()",
   group = "lsp_diagnostics_hold",
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = "netrw",
+  callback = function()
+    vim.api.nvim_buf_set_keymap(0, "n", "<leader>e", "<cmd>Lexplore<cr>", { noremap = true, silent = true })
+  end,
 })

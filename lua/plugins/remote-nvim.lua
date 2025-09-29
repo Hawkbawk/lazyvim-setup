@@ -8,12 +8,37 @@ return {
   },
   opts = {
     client_callback = function(port, workspace_config)
-      local cmd = string.format(
-        "zellij action new-tab --name 'remote-nvim:%s' -- nvim --server localhost:%s --remote-ui",
-        workspace_config.host,
-        port
+      local cmd = ("wezterm cli set-tab-title --pane-id $(wezterm cli spawn nvim --server localhost:%s --remote-ui) %s"):format(
+        port,
+        ("'Remote: %s'"):format(workspace_config.host)
       )
-      vim.fn.jobstart(cmd, { detach = true })
+      if vim.env.TERM == "xterm-kitty" then
+        cmd = ("kitty -e nvim --server localhost:%s --remote-ui"):format(port)
+      end
+      vim.fn.jobstart(cmd, {
+        detach = true,
+        on_exit = function(job_id, exit_code, event_type)
+          -- This function will be called when the job exits
+          print("Client", job_id, "exited with code", exit_code, "Event type:", event_type)
+        end,
+      })
     end,
+  },
+  keys = {
+    {
+      "<leader>rs",
+      "<cmd>RemoteStart<cr>",
+      desc = "Start Remote Session",
+    },
+    {
+      "<leader>rl",
+      "<cmd>RemoteLog<cr>",
+      desc = "Show Remote Log",
+    },
+    {
+      "<leader>ri",
+      "<cmd>RemoteInfo<cr>",
+      desc = "Show Remote Info",
+    },
   },
 }

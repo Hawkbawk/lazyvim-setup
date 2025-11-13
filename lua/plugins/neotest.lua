@@ -17,7 +17,7 @@ return {
       ["neotest-jest"] = {
         jestCommand = function(path)
           if string.find(path, "canvas%-lms") then
-            return "yarn test:jest"
+            return "docker compose run --rm web yarn test:jest"
           else
             return "npx jest"
           end

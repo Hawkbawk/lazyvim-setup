@@ -16,4 +16,11 @@ return {
       desc = "Toggle CLI",
     },
   },
+  opts = {
+    -- Sidekick is super slow the native copilot.lua plugin
+    -- is much faster.
+    nes = {
+      enabled = false,
+    },
+  },
 }
